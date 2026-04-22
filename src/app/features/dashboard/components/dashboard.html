@@ -1,0 +1,17 @@
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a routerLink="profile" routerLinkActive="active-sub">Profile</a>
+      <a routerLink="settings" routerLinkActive="active-sub">Settings</a>
+    </nav>
+    <button (click)="logout()" class="logout-btn">
+      Logout
+    </button>
+  </aside>
+
+  <section class="dashboard-content">
+    <router-outlet></router-outlet>
+  </section>
+
+</div>
