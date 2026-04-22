@@ -1,1 +1,53 @@
-<p>user-details works!</p>
+<div class="user-container">
+
+  <div class="card" *ngIf="userId; else loading">
+
+    <!-- Header -->
+    <div class="card-header">
+      <h2>User Details</h2>
+      <span class="badge">ID: {{ userId }}</span>
+    </div>
+
+    <!-- Avatar Section -->
+    <div class="avatar-section">
+      <div class="avatar">
+        {{ userId }}
+      </div>
+      <p class="subtitle">User Profile Information</p>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-row">
+        <label>User ID:</label>
+        <span>{{ userId }}</span>
+      </div>
+
+      <div class="info-row">
+        <label>Status:</label>
+        <span class="active">Active</span>
+      </div>
+
+      <div class="info-row">
+        <label>Role:</label>
+        <span>Member</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn primary">Edit User</button>
+      <button class="btn secondary">Back</button>
+    </div>
+
+  </div>
+
+  <!-- Loading Template -->
+  <ng-template #loading>
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <p>Loading user details...</p>
+    </div>
+  </ng-template>
+
+</div>
