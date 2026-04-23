@@ -102,6 +102,6 @@ npx prettier --check .
 
 ---
 
-*Built with ❤️ by [Your Name/Github]*
+*Built with ❤️ by Md Sahidul Islam Muhit
 
 
