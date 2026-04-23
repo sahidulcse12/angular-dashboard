@@ -42,9 +42,19 @@ export class Products implements OnInit {
   }
 
   ngOnInit(): void {
-    const { search, category } = this.route.snapshot.queryParams;
-    if (search) this.searchQuery.set(search);
-    if (category) this.selectedCategory.set(category);
+    
+   this.route.queryParams.subscribe(param=>{
+
+      this.searchQuery.set(
+        param['search'] || ''
+      );
+
+      this.selectedCategory.set(
+        param['category'] || ''
+      );
+
+    });
+
   }
 
   onSearchInput(event: Event): void {
