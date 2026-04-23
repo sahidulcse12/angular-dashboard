@@ -1,0 +1,61 @@
+<div class="products-page">
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        placeholder="Search products..."
+        [value]="searchQuery()"
+        (input)="onSearchInput($event)"
+        id="product-search"
+      />
+    </div>
+
+    <select
+      [value]="selectedCategory()"
+      (change)="onCategoryChange($event)"
+      id="category-filter"
+    >
+      <option value="">All Categories</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+
+    <button
+      class="clear-btn"
+      (click)="clearFilters()"
+      *ngIf="searchQuery() || selectedCategory()"
+      id="clear-filters"
+    >
+      ✕ Clear
+    </button>
+  </div>
+
+  <!-- Result Count -->
+  <p class="result-count">
+    Showing <strong>{{ filteredProducts().length }}</strong> of {{ products.length }} products
+  </p>
+
+  <!-- Product Grid -->
+  <div class="product-grid" *ngIf="filteredProducts().length > 0">
+    <div class="product-card" *ngFor="let product of filteredProducts()">
+      <div class="product-emoji">{{ product.image }}</div>
+      <span class="product-category">{{ product.category }}</span>
+      <h3 class="product-name">{{ product.name }}</h3>
+      <div class="product-rating">
+        ⭐ {{ product.rating }}
+      </div>
+      <div class="product-price">{{ product.price | currency }}</div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="filteredProducts().length === 0">
+    <span class="empty-icon">📭</span>
+    <h3>No products found</h3>
+    <p>Try adjusting your search or filter criteria.</p>
+    <button class="clear-btn" (click)="clearFilters()">Reset Filters</button>
+  </div>
+
+</div>
