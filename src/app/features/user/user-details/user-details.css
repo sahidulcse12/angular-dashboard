@@ -73,8 +73,34 @@ label {
 }
 
 .active {
-  color: green;
-  font-weight: bold;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.edit-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.edit-input-sm {
+  padding: 0.4rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.edit-input:focus, .edit-input-sm:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
 .actions {

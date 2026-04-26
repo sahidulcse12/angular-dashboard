@@ -14,14 +14,22 @@
         <div class="avatar">
           {{ (user()?.fullName || user()?.name || '?').charAt(0) }}
         </div>
-        <p class="subtitle">{{ user()?.role || 'User Profile Information' }}</p>
+        <div *ngIf="!isEditMode(); else editRole">
+          <p class="subtitle">{{ user()?.role || 'User Profile Information' }}</p>
+        </div>
+        <ng-template #editRole>
+          <input type="text" [(ngModel)]="editUser.role" class="edit-input-sm" placeholder="Enter role">
+        </ng-template>
       </div>
 
       <!-- Info Section -->
       <div class="info-section">
         <div class="info-row">
           <label>Full Name:</label>
-          <span>{{ user()?.fullName || user()?.name }}</span>
+          <span *ngIf="!isEditMode(); else editName">{{ user()?.fullName || user()?.name }}</span>
+          <ng-template #editName>
+            <input type="text" [(ngModel)]="editUser.fullName" class="edit-input">
+          </ng-template>
         </div>
 
         <div class="info-row">
@@ -29,9 +37,12 @@
           <span>{{ user()?.userId || user()?.id }}</span>
         </div>
 
-        <div class="info-row" *ngIf="user()?.depSerial">
+        <div class="info-row" *ngIf="user()?.depSerial || isEditMode()">
           <label>Dept Serial:</label>
-          <span>{{ user()?.depSerial }}</span>
+          <span *ngIf="!isEditMode(); else editSerial">{{ user()?.depSerial }}</span>
+          <ng-template #editSerial>
+            <input type="number" [(ngModel)]="editUser.depSerial" class="edit-input">
+          </ng-template>
         </div>
 
         <div class="info-row">
@@ -42,8 +53,10 @@
 
       <!-- Actions -->
       <div class="actions">
-        <button class="btn primary">Edit User</button>
-        <a routerLink="/users" class="btn secondary">Back to List</a>
+        <button *ngIf="!isEditMode()" class="btn primary" (click)="toggleEdit()">Edit User</button>
+        <button *ngIf="isEditMode()" class="btn primary" (click)="saveChanges()">Save Changes</button>
+        <button *ngIf="isEditMode()" class="btn secondary" (click)="toggleEdit()">Cancel</button>
+        <a routerLink="/home" class="btn secondary" *ngIf="!isEditMode()">Back to Home</a>
       </div>
     </ng-container>
 

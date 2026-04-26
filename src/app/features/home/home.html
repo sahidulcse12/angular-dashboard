@@ -17,7 +17,37 @@
       }
     </div>
 
-    <h2>Explore Source Personnel</h2>
+    <div class="section-header">
+      <h2>Explore Source Personnel</h2>
+      <button class="add-user-btn" (click)="openModal()">+ Add Personnel</button>
+    </div>
+
+    <!-- Modal Overlay -->
+    @if (showModal()) {
+      <div class="modal-overlay">
+        <div class="modal-card">
+          <h2>Add New Personnel</h2>
+          <form (ngSubmit)="submitUser()">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" [(ngModel)]="newUser.fullName" name="fullName" required placeholder="Enter name">
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <input type="text" [(ngModel)]="newUser.role" name="role" required placeholder="Enter role">
+            </div>
+            <div class="form-group">
+              <label>Dept Serial</label>
+              <input type="number" [(ngModel)]="newUser.depSerial" name="depSerial">
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" (click)="closeModal()">Cancel</button>
+              <button type="submit" class="btn-primary">Save Personnel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    }
     
     @if (isLoading()) {
       <div class="loading-state">
@@ -26,16 +56,18 @@
       </div>
     } @else {
       <div class="user-grid">
-        @for (user of displayedUsers(); track user.userId) {
+        @for (user of displayedUsers(); track (user.id || user.userId)) {
           <div class="user-card">
             <div class="avatar">
               {{ (user.fullName || '?').charAt(0) }}
             </div>
             <h3>{{ user.fullName }}</h3>
             <p class="dept">Dept Serial: {{ user.depSerial }}</p>
-            <a class="view-btn" [routerLink]="['/user', user.userId]">
-              View Profile
-            </a>
+            
+            <div class="card-actions">
+              <a class="action-btn view" [routerLink]="['/user', user.id || user.userId]">View Profile</a>
+              <button class="action-btn delete" (click)="deleteUser($event, user.id || user.userId)">Delete</button>
+            </div>
           </div>
         }
       </div>

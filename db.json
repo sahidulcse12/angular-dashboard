@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "fullName": "Md. Sahidul Islam Muhit",
+      "role": "Staff Engineer",
+      "depSerial": 2,
+      "id": "O0lzMEb_YNY",
+      "userId": 13580
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

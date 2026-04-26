@@ -1,8 +1,36 @@
 <div class="user-list-container">
   <div class="header-section">
     <h1>Source Persons</h1>
-    <p>Manage and view all source personnel from the BDJobs API.</p>
+    <p>Manage and view all source personnel from your local File-based API.</p>
+    <button class="add-btn" (click)="openModal()">+ Add New Personnel</button>
   </div>
+
+  <!-- Modal Overlay -->
+  @if (showModal()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <h2>Add New Personnel</h2>
+        <form (ngSubmit)="submitUser()">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" [(ngModel)]="newUser.fullName" name="fullName" required placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <input type="text" [(ngModel)]="newUser.role" name="role" required placeholder="Enter role">
+          </div>
+          <div class="form-group">
+            <label>Dept Serial</label>
+            <input type="number" [(ngModel)]="newUser.depSerial" name="depSerial">
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn secondary" (click)="closeModal()">Cancel</button>
+            <button type="submit" class="btn primary">Save Personnel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 
   @if (isLoading()) {
     <div class="loading-state">
@@ -32,7 +60,8 @@
             }
           </div>
           <div class="card-actions">
-            <a [routerLink]="['/user', user.userId || user.id]" class="view-btn">View Details</a>
+            <a [routerLink]="['/user', user.userId || user.id]" class="view-btn">View</a>
+            <button class="delete-btn" (click)="deleteUser(user.userId || user.id)">Delete</button>
           </div>
         </div>
       }
