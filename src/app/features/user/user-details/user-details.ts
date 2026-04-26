@@ -6,7 +6,7 @@ import { User } from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-user-details',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './user-details.html',
   styleUrl: './user-details.css',
 })
