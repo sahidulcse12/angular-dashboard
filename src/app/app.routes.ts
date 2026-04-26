@@ -4,6 +4,7 @@ import { Login } from './features/login/login';
 import { NotFound } from './shared/components/not-found/not-found';
 import { authGuard } from './core/guards/auth.guard';
 import { UserDetails } from './features/user/user-details/user-details';
+import { UserList } from './features/user/user-list/user-list';
 import { Products } from './features/products/products';
 
 export const routes: Routes = [
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'login', component: Login },
   { path: 'products', component: Products },
+  { path: 'users', component: UserList },
   { path: 'user/:id', component: UserDetails },
   {
     path: 'dashboard',

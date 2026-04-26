@@ -1,0 +1,41 @@
+<div class="user-list-container">
+  <div class="header-section">
+    <h1>Source Persons</h1>
+    <p>Manage and view all source personnel from the BDJobs API.</p>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Fetching data from API...</p>
+    </div>
+  } @else if (error()) {
+    <div class="error-state">
+      <div class="error-icon">!</div>
+      <p>{{ error() }}</p>
+      <button (click)="fetchUsers()" class="retry-btn">Retry</button>
+    </div>
+  } @else {
+    <div class="grid-container">
+      @for (user of users(); track (user.userId || user.id)) {
+        <div class="user-card">
+          <div class="card-avatar">
+            {{ (user.fullName || user.name || '?').charAt(0) }}
+          </div>
+          <div class="card-content">
+            <h3>{{ user.fullName || user.name }}</h3>
+            <p class="user-id">ID: {{ user.userId || user.id }}</p>
+            @if (user.role) {
+              <div class="badge role">{{ user.role }}</div>
+            } @else if (user.depSerial) {
+              <div class="badge">Dept Serial: {{ user.depSerial }}</div>
+            }
+          </div>
+          <div class="card-actions">
+            <a [routerLink]="['/user', user.userId || user.id]" class="view-btn">View Details</a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,42 +1,214 @@
-.card {
-  background: #f1f1f1;
-  padding: 20px;
-  border-radius: 10px;
+.home-container {
+  padding: 4rem 0 0;
+  animation: fadeIn 0.8s ease-out;
 }
 
-.user-container {
-  padding: 20px;
+.user-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.search-container {
+  margin-top: 0;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.2rem 1.2rem 1.2rem 3.5rem;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 15px 40px rgba(79, 70, 229, 0.15);
+  transform: translateY(-2px);
+}
+
+.search-result-text {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.user-section h2 {
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .user-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
 .user-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
   text-align: center;
-  transition: 0.3s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #f3f4f6;
 }
 
 .user-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.btn {
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #f3f4f6;
+  color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 auto 1.5rem;
+}
+
+.user-card h3 {
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.dept {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.view-btn {
   display: inline-block;
-  margin-top: 10px;
-  padding: 8px 15px;
-  background: #1abc9c;
+  padding: 0.75rem 1.5rem;
+  background: #4f46e5;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background 0.2s;
 }
 
-.btn:hover {
-  background: #16a085;
+.view-btn:hover {
+  background: #4338ca;
+}
+
+.load-more-section {
+  margin: 5rem 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.load-more-btn {
+  position: relative;
+  padding: 1.25rem 4rem;
+  background: white;
+  color: #4f46e5;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.15);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.load-more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: -1;
+}
+
+.load-more-btn:hover {
+  color: white;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+}
+
+.load-more-btn:hover::before {
+  width: 100%;
+}
+
+.load-more-btn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* Sub-text or icon effect */
+.load-more-btn::after {
+  content: '↓';
+  margin-left: 10px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.load-more-btn:hover::after {
+  transform: translateY(3px);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f4f6;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

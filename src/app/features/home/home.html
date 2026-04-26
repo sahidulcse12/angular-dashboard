@@ -1,16 +1,52 @@
-<div class="user-container">
-  <h2>User List</h2>
-
-  <div class="user-grid">
-    <div class="user-card" *ngFor="let user of users">
-
-      <h3>{{ user.name }}</h3>
-      <p>{{ user.role }}</p>
-
-      <a class="btn" [routerLink]="['/user', user.id]">
-        View Details
-      </a>
-
+<div class="home-container">
+  <div class="user-section">
+    <div class="search-container">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          placeholder="Search personnel by name or ID..." 
+          (input)="onSearch($event)"
+          class="search-input"
+        >
+      </div>
+      @if (searchQuery()) {
+        <p class="search-result-text">
+          Found {{ filteredUsers().length }} result(s) for "{{ searchQuery() }}"
+        </p>
+      }
     </div>
+
+    <h2>Explore Source Personnel</h2>
+    
+    @if (isLoading()) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading users...</p>
+      </div>
+    } @else {
+      <div class="user-grid">
+        @for (user of displayedUsers(); track user.userId) {
+          <div class="user-card">
+            <div class="avatar">
+              {{ (user.fullName || '?').charAt(0) }}
+            </div>
+            <h3>{{ user.fullName }}</h3>
+            <p class="dept">Dept Serial: {{ user.depSerial }}</p>
+            <a class="view-btn" [routerLink]="['/user', user.userId]">
+              View Profile
+            </a>
+          </div>
+        }
+      </div>
+
+      @if (hasMore()) {
+        <div class="load-more-section">
+          <button (click)="loadMore()" class="load-more-btn">
+            Load More Personnel
+          </button>
+        </div>
+      }
+    }
   </div>
 </div>

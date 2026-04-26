@@ -1,44 +1,58 @@
 <div class="user-container">
 
-  <div class="card" *ngIf="userId; else loading">
-
-    <!-- Header -->
-    <div class="card-header">
-      <h2>User Details</h2>
-      <span class="badge">ID: {{ userId }}</span>
-    </div>
-
-    <!-- Avatar Section -->
-    <div class="avatar-section">
-      <div class="avatar">
-        {{ userId }}
-      </div>
-      <p class="subtitle">User Profile Information</p>
-    </div>
-
-    <!-- Info Section -->
-    <div class="info-section">
-      <div class="info-row">
-        <label>User ID:</label>
-        <span>{{ userId }}</span>
+  <div class="card" *ngIf="!isLoading(); else loading">
+    
+    <ng-container *ngIf="user(); else notFound">
+      <!-- Header -->
+      <div class="card-header">
+        <h2>User Details</h2>
+        <span class="badge">ID: {{ user()?.userId || user()?.id }}</span>
       </div>
 
-      <div class="info-row">
-        <label>Status:</label>
-        <span class="active">Active</span>
+      <!-- Avatar Section -->
+      <div class="avatar-section">
+        <div class="avatar">
+          {{ (user()?.fullName || user()?.name || '?').charAt(0) }}
+        </div>
+        <p class="subtitle">{{ user()?.role || 'User Profile Information' }}</p>
       </div>
 
-      <div class="info-row">
-        <label>Role:</label>
-        <span>Member</span>
-      </div>
-    </div>
+      <!-- Info Section -->
+      <div class="info-section">
+        <div class="info-row">
+          <label>Full Name:</label>
+          <span>{{ user()?.fullName || user()?.name }}</span>
+        </div>
 
-    <!-- Actions -->
-    <div class="actions">
-      <button class="btn primary">Edit User</button>
-      <button class="btn secondary">Back</button>
-    </div>
+        <div class="info-row">
+          <label>User ID:</label>
+          <span>{{ user()?.userId || user()?.id }}</span>
+        </div>
+
+        <div class="info-row" *ngIf="user()?.depSerial">
+          <label>Dept Serial:</label>
+          <span>{{ user()?.depSerial }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Status:</label>
+          <span class="active">Active</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button class="btn primary">Edit User</button>
+        <a routerLink="/users" class="btn secondary">Back to List</a>
+      </div>
+    </ng-container>
+
+    <ng-template #notFound>
+      <div class="error-state">
+        <p>User not found!</p>
+        <a routerLink="/users" class="btn secondary">Back to List</a>
+      </div>
+    </ng-template>
 
   </div>
 
